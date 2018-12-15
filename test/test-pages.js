@@ -26,7 +26,11 @@ describe('404',function(){
 describe('canvas page',function(){
   it('expects a canvas element to be loaded',function(done){
     request('http://localhost:8080/canvas',function(error,response,body){
+<<<<<<< HEAD
       expect(body).to.include('canvas-container');
+=======
+      expect($(body).to.include('p5Canvas'));
+>>>>>>> 90f724c70505ff162596cf92615cb03bf813cf57
       done()
     })
   })

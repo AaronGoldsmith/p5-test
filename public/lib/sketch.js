@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class TriangleDots{
   constructor(x,y,h){
     this.x = x;
@@ -30,10 +31,13 @@ function fact(n){
   else if(n<1){return 0;}
   return n*fact(n-1);
 }
+=======
+>>>>>>> 90f724c70505ff162596cf92615cb03bf813cf57
 function setup(){
   var myCanvas = createCanvas(600, 400);
   myCanvas.parent('canvas-container');
   background(1);
+<<<<<<< HEAD
   paragraph = createDiv(`<h2 style='color:${state.color}'>${state.color} begins</h2>`);
   let B = new Board(4);
   triangle = new TriangleDots(width/2,height/4, 6);
@@ -71,6 +75,23 @@ function mousePressed(){
 // pre: color <String>, space <Space>, move <Integer>
 function makeMove(color, space, move){
 
+=======
+  TriangleDots(width/2,height/4, 6);
+  createP('NEW GAME - Blue can begin');
+}
+
+function TriangleDots(x,y,h){
+  const SZ = 20;
+  push();
+  translate(x,y);
+  for(var level = 0;level<h;level++){
+    for(var item = 0;item<(level+1);item++){
+       ellipse(item*2*SZ,level*2*SZ,SZ);
+    }
+    translate(-1*SZ,0);
+  }
+  pop();
+>>>>>>> 90f724c70505ff162596cf92615cb03bf813cf57
 }
 
 
