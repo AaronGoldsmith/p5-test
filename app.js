@@ -1,9 +1,19 @@
 const express = require('express')
+<<<<<<< HEAD
+
+=======
+>>>>>>> 90f724c70505ff162596cf92615cb03bf813cf57
 const path = require("path");
 const BP = require('body-parser');
 const app = express()
 
+<<<<<<< HEAD
+
 const PORT = 8080;
+
+=======
+const PORT = 8080;
+>>>>>>> 90f724c70505ff162596cf92615cb03bf813cf57
 app.use(express.static(path.join(__dirname,"public/lib/")));
 
 app.use(BP.json());
