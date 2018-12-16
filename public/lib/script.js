@@ -11,4 +11,4 @@ var scripts = {};
     return true;
   }
 
-module.exports = {addSum,validateNumbers};
+export default {addSum,validateNumbers};

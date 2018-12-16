@@ -61,5 +61,9 @@ typings/
 
 # next.js build output
 .next
+<<<<<<< HEAD
 
 p5.dom.js
+=======
+p5.dom.js
+>>>>>>> acc30ed7e84f560149e9d3604985c2c228274d10

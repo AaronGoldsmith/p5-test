@@ -1,7 +1,7 @@
 {
-  "name": "p5testing",
+  "name": "p5-testing",
   "version": "1.0.0",
-  "description": "for testing",
+  "description": "for testing p5",
   "main": "app.js",
   "scripts": {
     "test": "mocha"
@@ -16,6 +16,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "chai-dom": "^1.8.1",
     "path": "^0.12.7"
   },
   "devDependencies": {
