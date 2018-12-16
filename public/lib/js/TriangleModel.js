@@ -1,28 +1,35 @@
-class TriangleModel {
+class TriangleModel
+{
 
-  constructor(levels){
-     this.rows = [];
-     this.size = levels;
+  constructor(levels)
+  {
+    this.size = levels;
+    this.rows = this.constructRows(levels);
+  }
 
-      for(let i = 0;i<this.size;i++){
-        for(let space = 0;space<i;space++){
-          this.rows.push({color: '\" \"', move: 0});
-        }
+  
+  constructRows(levels){
+    let myRows = [];
+    for (let i = 0; i < levels; i++) {
+      for (let space = 0; space < i; space++) {
+        myRows.push({ color: '\" \"', move: 0 });
       }
     }
+    return myRows;
+  }
 
-     printState(){
-      // var count = 0;
-      var str = ""
-      for(let i = 1;i<=this.size;i++){
-        str+= `row${i} `
-        for(let space = 0;space<i;space++){
-          let sp = this.rows[space];
-          str+= `(${sp.color} – ${sp.move})`;
-        }
-        str+='\n';
-        console.log(str);
-     }
+  printState()
+  {
+    var str = ""
+    for (let i = 1; i <= this.size; i++) {
+      str += `row${i} `
+      for (let space = 0; space < i; space++) {
+        let sp = this.rows[space];
+        str += `(${sp.color} – ${sp.move})`;
+      }
+      str += '\n';
+      console.log(str);
     }
-    
+  }
+
 }

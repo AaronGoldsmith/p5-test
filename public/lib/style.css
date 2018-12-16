@@ -1,4 +1,9 @@
 #canvas-container{
   width: 650px;
-  float: left;
+  margin: 0px auto;
+  padding: 50px 0px;
+}
+#page-wrap{
+  text-align:center;
+  padding: 5% 0;
 }
