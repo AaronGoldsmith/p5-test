@@ -1,59 +1,67 @@
-// import { TriangleModel } from "./TriangleModel"
-// const TriangleView = require('./TriangleView');
-// const TriangleModel = require('./TriangleModel');
 
-let state = {
-  color: 'blue',
-  move: 1
-}
 const SIZE = 6;
-let board;
-let triangle;
-let description;
+let color = (Math.floor(Math.random()*2)==1)?"blue":"red";
+let board, triangle,description,moveNum;
+
 
 function setup(){
   var myCanvas = createCanvas(600, 400);
   myCanvas.parent('canvas-container');
-  background(1);
+  background(0);
   description = createP('');
   description.parent('page-wrap')
   this.updateHTML();
 
-  board = new TriangleView(width/2,height/4, 6);
-  triangle = new TriangleModel(6);
-  triangle.printState();
+  board = new TriangleView(width/2,height/4, SIZE);
+  triangle = new TriangleModel(SIZE);
   board.show();
 
 }
 // checking to see if a circle was clicked on
-function handleClick(){
-  let myLoc = createVector(mouseX,mouseY);
-  board
-
+function handleClick(x,y){
+  let _x = (x-board.x), _y = (y-board.y);
+  let min = 20;
+  let minObj = -1;
+  for(var i = 0;i<board.Tlocs.length;i++){
+    let tempDist = dist( _x,_y,board.Tlocs[i].x,board.Tlocs[i].y);
+    if(tempDist<min){
+      min=tempDist;
+      minObj = i;
+    }
+  }
+  return minObj;
 }
-function TriangleDriver(){
-   
-}
 
+// controller
+function updateDot(model,index,color,mov){
+  model.rows[index].color = color;
+  model.rows[index].move = mov;
+  return model;
+}
 
 function mousePressed(){
   // check to see if clicked on a valid spot
   // flip state of color 
-  handleClick();
-  if(state.color==='blue'){
-    state.color='red';
+  let elClicked = handleClick(mouseX,mouseY);
+  triangle.updateId(1,'blue',4);
+  if(elClicked>=0){
+    console.log(elClicked);
+    triangle.rows = updateDot(triangle,elClicked,color,moveNum)
+    if(color==='blue'){
+      color='red';
+    }
+    else{
+       color='blue';
+    }
   }
-  else{
-    state.color='blue';
-  }
-  
+
 }
 
   // Display which color's turn
 function updateHTML(){
   description.html(
-      `<h2 style='color:${state.color}'>
-          It's ${state.color}'s move 
+      `<h2 style='color:${color}'>
+          It's ${color}'s move 
       </h2>`)
 }
 
@@ -70,30 +78,25 @@ class TriangleView{
     this.x = x;
     this.y = y;
     this.h = h;
-    // this.colors = fillColors(seq());
+    this.Tlocs = this.findSpots();
   }
 
   findSpots(){
     let locs = [];
     for(var level = 0;level<this.h;level++){
       for(var item = 0;item<(level+1);item++){
-         ellipse(item*40,level*40,40);
+          locs.push(createVector(item*40-20*level,level*40));
       }
-      translate(-20,0);
     }
+    return locs;
   }
   
 
   show(){
-    push();
     translate(this.x, this.y);
-    for(var level = 0;level<this.h;level++){
-      for(var item = 0;item<(level+1);item++){
-         ellipse(item*40,level*40,40);
-      }
-      translate(-20,0);
+    for(var spot of this.Tlocs){
+      ellipse(spot.x,spot.y,40);
     }
-    pop();
   }
-  
 }
+
