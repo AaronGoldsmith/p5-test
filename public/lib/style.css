@@ -1,4 +1,17 @@
+*{
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+}
+body{
+  background: black;
+}
 #canvas-container{
   width: 650px;
-  float: left;
+  margin: 0px auto;
+  padding: 40px 0px;
 }
+#page-wrap{
+  text-align:center;
+  padding: 5% 0;
+}
+
