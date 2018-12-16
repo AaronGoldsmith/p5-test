@@ -4,7 +4,8 @@
   "description": "for testing p5",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev:start": "nodemon app.js"
   },
   "keywords": [
     "test",
