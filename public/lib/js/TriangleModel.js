@@ -1,4 +1,4 @@
-module.exports = class Board {
+class TriangleModel {
 
   constructor(levels){
      this.rows = [];
@@ -11,18 +11,6 @@ module.exports = class Board {
       }
     }
 
-    //  printState(){
-    //   var count = 0;
-    //   var str = ""
-    //   for(let i = 1;i<=this.size;i++){
-    //     str+= `r${i}\t`
-    //     for(let space = 0;space<i;space++){
-    //       str+= `(${++count})`;
-    //     }
-    //     str+='\n';
-    //   }
-    //   console.log(str);
-    //  }
      printState(){
       // var count = 0;
       var str = ""

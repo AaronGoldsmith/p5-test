@@ -1,4 +1,4 @@
-class TriangleDots{
+class TriangleView{
 
   // x,y are the canvas coordinates of the top most bead
   constructor(x,y,h){
@@ -21,5 +21,3 @@ class TriangleDots{
   }
   
 }
-
-module.export = TriangleDots;

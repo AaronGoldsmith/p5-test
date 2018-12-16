@@ -1,14 +1,18 @@
-var TriangleModel = require("./TriangleModel");
-var TriangleView = require('./TriangleView');
- 
-const state = {
-  color: 'blue',
-  move: 1
-}
+// import { TriangleModel } from "./TriangleModel"
+// const TriangleView = require('./TriangleView');
+// const TriangleModel = require('./TriangleModel');
+
+
+let state;
 let triangle;
 let paragraph;
 
-
+function preload(){
+  state = {
+    color: 'blue',
+    move: 1
+  }
+}
 function setup(){
   var myCanvas = createCanvas(600, 400);
   myCanvas.parent('canvas-container');
@@ -46,5 +50,5 @@ function draw(){
 
 }
 
-let TM = new TriangleModel(3);
-TM.printState();
+// let TM = new TriangleModel(3);
+// TM.printState();

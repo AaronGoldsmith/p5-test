@@ -1,4 +1,4 @@
-const testObj = require('../public/lib/script');
+const testObj = require('../public/lib/js/script');
 var assert = require('assert');
 
 // 2 DESCRIBES
