@@ -1,22 +1,4 @@
-class TriangleDots{
-  constructor(x,y,h){
-    this.x = x;
-    this.y = y;
-    this.h = h;
-  }
-  show(){
-    push();
-    translate(this.x,this.y);
-    for(var level = 0;level<this.h;level++){
-      for(var item = 0;item<(level+1);item++){
-         ellipse(item*40,level*40,40);
-      }
-      translate(-20,0);
-    }
-    pop();
-  }
-  
-}
+let TriangleView = require("./TriangleView");
 
 const state = {
   color: 'blue',
@@ -36,7 +18,7 @@ function setup(){
   background(1);
   paragraph = createDiv(`<h2 style='color:${state.color}'>${state.color} begins</h2>`);
   let B = new Board(4);
-  triangle = new TriangleDots(width/2,height/4, 6);
+  triangle = new TriangleView(width/2,height/4, 6);
   triangle.show();
 
 }
