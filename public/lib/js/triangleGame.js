@@ -1,10 +1,13 @@
 
-const SIZE = 6;
+const SIZE = 5;
 let color = (Math.floor(Math.random()*2)==1)?"blue":"red";
 let board, triangle,description,moveNum;
 
 
+
+
 function setup(){
+  
   var myCanvas = createCanvas(600, 400);
   myCanvas.parent('canvas-container');
   background(0);
@@ -78,13 +81,13 @@ class TriangleView{
     this.x = x;
     this.y = y;
     this.h = h;
-    this.Tlocs = this.findSpots();
+    this.Tlocs = this.findSpots(); // array of location : [[100, 10], [20,30]...]
   }
 
   findSpots(){
     let locs = [];
     for(var level = 0;level<this.h;level++){
-      for(var item = 0;item<(level+1);item++){
+      for(var item = 0;item<=level;item++){
           locs.push(createVector(item*40-20*level,level*40));
       }
     }

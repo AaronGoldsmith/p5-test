@@ -4,36 +4,34 @@ class TriangleModel
   constructor(levels)
   {
     this.size = levels;
-    this.rows = this.constructRows(levels);
+    this.data = this.constructRows(levels);
   }
 
+  // mapLocs
+  // return Hashmap <Integer : p5.Vector>
 
-  updateId(n,color,move){
 
-    for(var row of this.rows){
-      for(var col in this.rows.length){
-        console.log(row,col);
-        if(this.rows[row][col].id===n){
-          this.rows[row][col].color = color;
-          col.move = move;
-        }
-      }
-    }
+  updateId(n,mycolor,mymove){
+    let loc = this.data.hash.get(n);
+    this.data.rows[loc.y][loc.x] = {color: mycolor,move:mymove }
   }
 
   constructRows(levels){
     let myRows = [];
+    let H = new Map();
     let count = 0;
-    for (let i = 1; i < levels; i++) {
+    for (let i = 0; i < levels; i++) {
       var currentRow = [];
-      for (let space = 0; space <i; space++) {
-        currentRow.push({id: count++, color: '', move: 0 });
+      for (let space = 0; space <=i; space++) {
+        currentRow.push({color: '', move: 0 });
+        H.set(count++,createVector(space,i));
       }
       myRows.push(currentRow);
     }
-    return myRows;
+    return {rows: myRows, hash: H};
   }
   printRows(){
-    console.log(this.rows);
+    this.data.rows.forEach( row => console.log(row));
   }
 }
+
