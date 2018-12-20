@@ -3,35 +3,33 @@ function setup(){
   var myCanvas = createCanvas(600, 400);
   myCanvas.parent('canvas-container');
   stroke('red');
-  strokeWeight(2);
+  strokeWeight(1);
   background(255);
   noFill()
 
   // draw stem
   translate(width/2,height);
-  line(0,0,0,-height*0.2);
-  translate(0,-height*0.2);
+  line(0,0,0,-height*0.23);
+  translate(0,-height*0.23);
 
-  makeFractal(height*0.2,45,false);
+  makeFractal(height*0.23,180*random());
 }
 
 
-function makeFractal(len,angle,curvy){
-  if(curvy){ bezier(0,0,len*0.8,-len*0.1,0,-len*0.5,0,-len) }
-  else{ line(0,0,0,-len) }
-
+function makeFractal(len,angle){
+  line(0,0,0,-len) 
   translate(0,-len);
   if(len>1){
     push()
     rotate(angle);
     line(0,0,0,-len*0.67);
-    makeFractal(len*0.77,angle,false);
+    makeFractal(len*0.67,angle);
     pop()
     
     push()
     rotate(-angle);
     line(0,0,0,-len*0.67);
-    makeFractal(len*0.67,angle,false);
+    makeFractal(len*0.67,angle);
     pop()
   }
 
