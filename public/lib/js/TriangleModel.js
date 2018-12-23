@@ -39,7 +39,7 @@ class TriangleModel
   getAllColors(){
     var arr = [];
     this.data.rows.forEach( row => 
-      row.forEach(spot => arr.push(spot.color))
+      row.forEach(spot => arr.push(spot.color)))
    return arr;
   }
 }
