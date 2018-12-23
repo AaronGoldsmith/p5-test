@@ -1,32 +1,44 @@
 
 const SIZE = 5;
+
+// randomize who goes first
 let color = (Math.floor(Math.random()*2)==1)?"blue":"red";
-let board, triangle,description,moveNum;
 
-
-
+//  VIEW    MODEL     HTML        Turn
+let board, triangle, description, moveNum;
+let currentColors;
 
 function setup(){
-  
   var myCanvas = createCanvas(600, 400);
   myCanvas.parent('canvas-container');
   background(0);
   description = createP('');
   description.parent('page-wrap')
-  this.updateHTML();
+
+  noLoop()
+
+  moveNum = 0;
+  triangle = new TriangleModel(SIZE);
 
   board = new TriangleView(width/2,height/4, SIZE);
-  triangle = new TriangleModel(SIZE);
-  board.show();
+
+  updateHTML();
 
 }
+
+function draw(){
+  currentColors = triangle.getAllColors();
+  background(0);
+  board.show();
+}
 // checking to see if a circle was clicked on
-function handleClick(x,y){
-  let _x = (x-board.x), _y = (y-board.y);
-  let min = 20;
+function handleClick(myboard){
+  let x = (mouseX-myboard.loc.x), y = (mouseY-myboard.loc.y);
+  let min = 15;
   let minObj = -1;
-  for(var i = 0;i<board.Tlocs.length;i++){
-    let tempDist = dist( _x,_y,board.Tlocs[i].x,board.Tlocs[i].y);
+  for(var i = 0;i<myboard.Tlocs.length;i++){
+    let bloc = myboard.Tlocs[i];
+    let tempDist = dist( x,y,bloc.x,bloc.y);
     if(tempDist<min){
       min=tempDist;
       minObj = i;
@@ -35,30 +47,7 @@ function handleClick(x,y){
   return minObj;
 }
 
-// controller
-function updateDot(model,index,color,mov){
-  model.rows[index].color = color;
-  model.rows[index].move = mov;
-  return model;
-}
 
-function mousePressed(){
-  // check to see if clicked on a valid spot
-  // flip state of color 
-  let elClicked = handleClick(mouseX,mouseY);
-  triangle.updateId(1,'blue',4);
-  if(elClicked>=0){
-    console.log(elClicked);
-    triangle.rows = updateDot(triangle,elClicked,color,moveNum)
-    if(color==='blue'){
-      color='red';
-    }
-    else{
-       color='blue';
-    }
-  }
-
-}
 
   // Display which color's turn
 function updateHTML(){
@@ -66,11 +55,9 @@ function updateHTML(){
       `<h2 style='color:${color}'>
           It's ${color}'s move 
       </h2>`)
+  redraw();
 }
 
-function draw(){
-
-}
 
 
 // VIEW
@@ -78,28 +65,46 @@ class TriangleView{
 
   // x,y are the canvas coordinates of the top most bead
   constructor(x,y,h){
-    this.x = x;
-    this.y = y;
-    this.h = h;
-    this.Tlocs = this.findSpots(); // array of location : [[100, 10], [20,30]...]
+    this.loc = createVector(x,y);  
+    this.Tlocs = this.assignSpots(h); // array of locations : [[100, 10], [20,30]...]
   }
 
-  findSpots(){
+  assignSpots(height){
     let locs = [];
-    for(var level = 0;level<this.h;level++){
+    for(var level = 0;level<height;level++){
       for(var item = 0;item<=level;item++){
-          locs.push(createVector(item*40-20*level,level*40));
+          let scaled = level*20;
+          locs.push(createVector(item*40-scaled,2*scaled));
       }
     }
     return locs;
   }
-  
 
   show(){
-    translate(this.x, this.y);
-    for(var spot of this.Tlocs){
-      ellipse(spot.x,spot.y,40);
+    translate(this.loc.x, this.loc.y);
+    for(let index = 0;index<currentColors.length;index++){
+      var spot = this.Tlocs[index]
+      fill(currentColors[index])
+      ellipse(spot.x,spot.y,34);
     }
+
   }
 }
 
+function mousePressed(){
+  // check to see if clicked on a valid spot
+  // toggle state of color 
+  let elClicked = handleClick(board);
+  if(elClicked>=0){
+      if(triangle.updateId(elClicked,color,floor(moveNum/2))){
+        moveNum++;
+        if(color==='blue'){
+          color='red';
+        }
+        else{
+           color='blue';
+        }
+        updateHTML();
+      }
+    }
+}

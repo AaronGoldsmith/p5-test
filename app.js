@@ -10,21 +10,18 @@ app.use(BP.json());
 app.use(BP.urlencoded({ extended: false }));
 
 app.get('/', function(req,res){
-  res.send('Hello World');
+  let str = ("Hello World <p><a href='/canvas'>Canvas</a> </p>")
+  res.send(str);
+
 })
 app.get('/about',function(req,res){
   res.send('About');
 })
 
 app.get('/canvas',function(req,res){
-  // res.sendFile(path.join(__dirname,'public/lib/sketch.html'));
   res.sendFile(path.join(__dirname,'public/lib/sketch.html'));
-
 })
 
 app.listen(PORT, function () {
-  console.log(`App listening on port ${PORT}`);
+  console.log(`App listening on http://localhost:${PORT}`);
 })
-
-var HashMap = require('hashmap');
-var map = new HashMap();
