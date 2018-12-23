@@ -3,7 +3,7 @@ const SIZE = 5;
 let color = (Math.floor(Math.random()*2)==1)?"blue":"red";
 let board, triangle,description,moveNum;
 
-
+var x;
 
 
 function setup(){
@@ -15,6 +15,7 @@ function setup(){
   description.parent('page-wrap')
   this.updateHTML();
 
+  moveNum = 0;
   board = new TriangleView(width/2,height/4, SIZE);
   triangle = new TriangleModel(SIZE);
   board.show();
@@ -23,10 +24,11 @@ function setup(){
 // checking to see if a circle was clicked on
 function handleClick(x,y){
   let _x = (x-board.x), _y = (y-board.y);
-  let min = 20;
+  let min = 15;
   let minObj = -1;
   for(var i = 0;i<board.Tlocs.length;i++){
-    let tempDist = dist( _x,_y,board.Tlocs[i].x,board.Tlocs[i].y);
+    let bloc = board.Tlocs[i];
+    let tempDist = dist( _x,_y,bloc.x,bloc.y);
     if(tempDist<min){
       min=tempDist;
       minObj = i;
@@ -35,28 +37,22 @@ function handleClick(x,y){
   return minObj;
 }
 
-// controller
-function updateDot(model,index,color,mov){
-  model.rows[index].color = color;
-  model.rows[index].move = mov;
-  return model;
-}
 
 function mousePressed(){
   // check to see if clicked on a valid spot
   // flip state of color 
   let elClicked = handleClick(mouseX,mouseY);
-  triangle.updateId(1,'blue',4);
   if(elClicked>=0){
     console.log(elClicked);
-    triangle.rows = updateDot(triangle,elClicked,color,moveNum)
-    if(color==='blue'){
-      color='red';
+    triangle.updateId(elClicked,color,moveNum);
+      if(color==='blue'){
+        color='red';
+      }
+      else{
+         color='blue';
+      }
+      updateHTML();
     }
-    else{
-       color='blue';
-    }
-  }
 
 }
 

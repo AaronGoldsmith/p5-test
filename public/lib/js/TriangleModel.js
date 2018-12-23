@@ -7,13 +7,17 @@ class TriangleModel
     this.data = this.constructRows(levels);
   }
 
-  // mapLocs
-  // return Hashmap <Integer : p5.Vector>
-
-
   updateId(n,mycolor,mymove){
     let loc = this.data.hash.get(n);
-    this.data.rows[loc.y][loc.x] = {color: mycolor,move:mymove }
+
+    if(this.data.rows[loc.y][loc.x].move==-1){
+      console.log(this.data.rows[loc.y][loc.x]);
+      this.data.rows[loc.y][loc.x].color = mycolor;
+      this.data.rows[loc.y][loc.x].move = mymove;
+      console.log(this.data.rows[loc.y][loc.x]);
+    }
+  
+
   }
 
   constructRows(levels){
@@ -23,7 +27,7 @@ class TriangleModel
     for (let i = 0; i < levels; i++) {
       var currentRow = [];
       for (let space = 0; space <=i; space++) {
-        currentRow.push({color: '', move: 0 });
+        currentRow.push({color: '', move: -1 });
         H.set(count++,createVector(space,i));
       }
       myRows.push(currentRow);
