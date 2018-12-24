@@ -14,9 +14,10 @@ class TriangleModel
       return true;
     }
     return false;
-  
-
   }
+
+  // return location of hole
+  
 
   constructRows(levels){
     let myRows = [];
